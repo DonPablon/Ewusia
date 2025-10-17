@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kocham Cię Słoneczko</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffc3d8 25%, #ff8fab 50%, #ffb3c7 75%, #ff6b9d 100%);
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .main-title {
+            font-size: 3.5em;
+            color: #fff;
+            text-align: center;
+            text-shadow: 3px 3px 6px rgba(199, 21, 82, 0.4);
+            margin-bottom: 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .sun-icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 40px;
+            animation: rotate 10s linear infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 200, 50, 0.8));
+        }
+
+        .blog-content {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 800px;
+            box-shadow: 0 8px 32px rgba(199, 21, 82, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin-top: 20px;
+        }
+
+        .blog-text {
+            color: #fff;
+            font-size: 1.2em;
+            line-height: 1.8;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animowane serduszka */
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0;
+            animation: floatUp 6s ease-in infinite;
+            color: #ff1744;
+            text-shadow: 0 0 10px rgba(255, 23, 68, 0.5);
+        }
+
+        .heart:nth-child(2n) {
+            color: #ff4081;
+            animation-delay: 1s;
+        }
+
+        .heart:nth-child(3n) {
+            color: #f50057;
+            animation-delay: 2s;
+        }
+
+        .heart:nth-child(4n) {
+            animation-delay: 3s;
+        }
+
+        /* Animowane kwiaty */
+        .flower {
+            position: absolute;
+            font-size: 35px;
+            opacity: 0;
+            animation: floatUp 8s ease-in infinite;
+        }
+
+        .flower:nth-child(2n) {
+            animation-delay: 2s;
+        }
+
+        .flower:nth-child(3n) {
+            animation-delay: 4s;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Pozycjonowanie elementów */
+        .heart:nth-child(1) { left: 10%; }
+        .heart:nth-child(2) { left: 20%; animation-delay: 1.5s; }
+        .heart:nth-child(3) { left: 30%; animation-delay: 3s; }
+        .heart:nth-child(4) { left: 40%; animation-delay: 0.5s; }
+        .heart:nth-child(5) { left: 50%; animation-delay: 2s; }
+        .heart:nth-child(6) { left: 60%; animation-delay: 4s; }
+        .heart:nth-child(7) { left: 70%; animation-delay: 1s; }
+        .heart:nth-child(8) { left: 80%; animation-delay: 3.5s; }
+        .heart:nth-child(9) { left: 90%; animation-delay: 2.5s; }
+
+        .flower:nth-child(10) { left: 15%; }
+        .flower:nth-child(11) { left: 35%; animation-delay: 1s; }
+        .flower:nth-child(12) { left: 55%; animation-delay: 3s; }
+        .flower:nth-child(13) { left: 75%; animation-delay: 2s; }
+        .flower:nth-child(14) { left: 85%; animation-delay: 4s; }
+
+        /* Bukiety piwonii w rogach */
+        .peony-corner {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+
+        .peony-top-left {
+            top: -80px;
+            left: -80px;
+            transform: rotate(-15deg);
+        }
+
+        .peony-top-right {
+            top: -80px;
+            right: -80px;
+            transform: rotate(15deg) scaleX(-1);
+        }
+
+        .peony-bottom-left {
+            bottom: -80px;
+            left: -80px;
+            transform: rotate(15deg) scaleY(-1);
+        }
+
+        .peony-bottom-right {
+            bottom: -80px;
+            right: -80px;
+            transform: rotate(-15deg) scale(-1);
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2em;
+            }
+            .sun-icon {
+                width: 80px;
+                height: 80px;
+            }
+            .blog-content {
+                padding: 25px;
+            }
+            .blog-text {
+                font-size: 1em;
+            }
+            .peony-corner {
+                width: 200px;
+                height: 200px;
+            }
+            .peony-top-left {
+                top: -60px;
+                left: -60px;
+            }
+            .peony-top-right {
+                top: -60px;
+                right: -60px;
+            }
+            .peony-bottom-left {
+                bottom: -60px;
+                left: -60px;
+            }
+            .peony-bottom-right {
+                bottom: -60px;
+                right: -60px;
+            }
+            .blog-content {
+                padding: 10px;
+                max-width: 90%;
+                margin-top: 15px;
+            }
+            .blog-text {
+                font-size: 0.8em;
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bukiety piwonii w rogach -->
+    <img src="piwonie.png" class="peony-corner peony-top-left" alt="">
+    <img src="piwonie.png" class="peony-corner peony-top-right" alt="">
+    <img src="piwonie.png" class="peony-corner peony-bottom-left" alt="">
+    <img src="piwonie.png" class="peony-corner peony-bottom-right" alt="">
+
+    <!-- Animowane serduszka -->
+    <div class="heart">❤️</div>
+    <div class="heart">💕</div>
+    <div class="heart">💖</div>
+    <div class="heart">❤️</div>
+    <div class="heart">💕</div>
+    <div class="heart">💗</div>
+    <div class="heart">❤️</div>
+    <div class="heart">💕</div>
+    <div class="heart">💖</div>
+
+    <!-- Animowane kwiaty -->
+    <div class="flower">🌸</div>
+    <div class="flower">🌺</div>
+    <div class="flower">🌷</div>
+    <div class="flower">🌹</div>
+    <div class="flower">🌸</div>
+
+    <div class="container">
+        <!-- Ikona słońca -->
+        <svg class="sun-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="20" fill="#FFD700"/>
+            <g stroke="#FFD700" stroke-width="3" stroke-linecap="round">
+                <line x1="50" y1="10" x2="50" y2="20"/>
+                <line x1="50" y1="80" x2="50" y2="90"/>
+                <line x1="10" y1="50" x2="20" y2="50"/>
+                <line x1="80" y1="50" x2="90" y2="50"/>
+                <line x1="20" y1="20" x2="27" y2="27"/>
+                <line x1="73" y1="73" x2="80" y2="80"/>
+                <line x1="20" y1="80" x2="27" y2="73"/>
+                <line x1="73" y1="27" x2="80" y2="20"/>
+            </g>
+        </svg>
+
+        <!-- Główny tytuł -->
+        <h1 class="main-title">Kocham Cię Słoneczko</h1>
+
+        <!-- Treść bloga -->
+        <div class="blog-content">
+            <p class="blog-text">
+                ☀️ Jesteś słoneczkiem, które rozświetla każdy mój dzień ☀️<br>
+                💕 Dziękuję Ci za wsparcie, które mi dajesz 💕<br>
+                💞 Za to że zawsze jesteś obecna, gdy Cię potrzebuje 💞 <br>
+                💗 Z Tobą każda chwila jest wyjątkowa i pełna szczęścia 💗<br>
+                💖 Dziękuję Ci za to, że jesteś w moim życiu! 💖 <br>
+                ❤️ Kocham Cię najbardziej i najmocnej na całym świecie ❤️
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Dodatkowa interaktywność - tworzenie więcej serduszek przy kliknięciu
+        document.body.addEventListener('click', function(e) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💖';
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
+            heart.style.position = 'fixed';
+            heart.style.animation = 'floatUp 3s ease-in forwards';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
